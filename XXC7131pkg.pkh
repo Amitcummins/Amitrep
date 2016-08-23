@@ -1,0 +1,44 @@
+CREATE OR REPLACE PACKAGE XXC7131_SUPPLIER_DQ_OUT_PKG
+   AUTHID CURRENT_USER
+AS
+   /******************************************************************************
+      NAME:       XXC7131.plb
+      PURPOSE:    DDL script to create all custom package bodies.
+
+      REVISIONS:
+      Ver        Date        Author           Description
+      ---------  ----------  ---------------  ------------------------------------
+      1.0        20-May-15   Infosys          1. Initial Version.
+	  1.1           06-Nov-15     Infosys	Modified script for upgrade
+
+*****************************************************************************/
+
+   -- declaration of global variables
+
+   g_num_request_id       NUMBER := fnd_global.conc_request_id;
+   g_num_con_program_id   NUMBER := apps.fnd_global.conc_program_id;
+   g_dte_sysdate          TIMESTAMP := SYSDATE;
+
+   /*********************************************************************
+   * Procedure         :               POP_DATA                       *
+   * Input Parameters  :                      p_dte_last_run_date                               *
+   * Output Parameters :   p_num_retcode
+                                        p_chr_errbuf
+   * Purpose           :   Procedure to populate records*
+   *********************************************************************/
+   PROCEDURE pop_data (p_num_retcode            OUT NOCOPY NUMBER,
+                       p_chr_errbuf             OUT NOCOPY VARCHAR2,
+                       p_dte_last_run_date   IN            DATE DEFAULT NULL);
+
+/*********************************************************************
+   * Procedure         :          purge_data                        *
+   * Input Parameters  :                                                  *
+   * Output Parameters :   p_num_retcode
+                                        p_chr_errbuf
+   * Purpose           :   Procedure to purge data*
+   *********************************************************************/
+    PROCEDURE purge_data ( p_num_ret_code   OUT  NOCOPY NUMBER,
+   p_chr_err_buff   OUT NOCOPY VARCHAR2  ---to purge records
+                         );
+END XXC7131_SUPPLIER_DQ_OUT_PKG;
+/
